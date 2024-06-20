@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OrdenarInteressadas {
 
-    public static List<int[]> ordenarInteressadas(List<int[]> conjuntoDeTeste) {
+    */ public static List<int[]> ordenarInteressadas(List<int[]> conjuntoDeTeste) {
         List<int[]> conjuntoDeTesteOrdenado = new ArrayList<>(conjuntoDeTeste.size());
 
         for (int i = 0; i < conjuntoDeTeste.size(); i++) {
@@ -76,4 +76,5 @@ public class OrdenarInteressadas {
             System.out.println(Arrays.toString(conjuntoDeTesteOrdenado.get(i)));
         }
     }
+    */
 }
