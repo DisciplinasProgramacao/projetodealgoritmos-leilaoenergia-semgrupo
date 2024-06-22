@@ -1,84 +1,81 @@
 import java.util.ArrayList;
-import java.util.List;
 
 class Backtracking {
-    public void tenta(ArrayList<Interessada> ListaDeInteressadas) {
-        boolean movimentoBemSucedido;
-        ArrayList<Interessada> interessadasRestantes;
+    static int valorProvisorio = 0;
+    static int valorFinal = 0;
+    static int i = 0;
+    static int quantidadeDeEnergia;
+    static ArrayList<Interessada> ListaDeInteressadas = new ArrayList<Interessada>();
+    static ArrayList<Interessada> ListaDeInteressadasRestantes = new ArrayList<Interessada>();
+    static ArrayList<Interessada> ListaResultadoProvisorio = new ArrayList<Interessada>();
+    static ArrayList<Interessada> ListaResultadoFinal = new ArrayList<Interessada>();
 
-        do {
-            if (solucaoAceitavel(interessada)) {
-                registraInteressada(interessada);
+    public static void backtrack(ArrayList<Interessada> ListaDeInteressadas, int novaQuantidadeDeEnergia) {
+        quantidadeDeEnergia = novaQuantidadeDeEnergia;
+        i = ListaDeInteressadasRestantes.size();
+        ListaDeInteressadasRestantes = ListaDeInteressadas;
+        Interessadas.mostrarInteressadasRestantes();
+        tenta(ListaDeInteressadasRestantes.get(i));
+    }
 
-                if (!solucaoDefinitiva(interessada)) {
-                    interessadasRestantes = gerarInteressadasRestantes(interessada);
+    public static void tenta(Interessada interessada) {
 
-                    for (Interessada interessadaRestante : interessadasRestantes) {
-                        tenta(interessadaRestante);
+        if (solucaoAceitavel(interessada)) {
+            registraInteressada(interessada);
 
-                        if (!encontrouSolucao()) {
-                            apagaRegistroAnterior(interessadaRestante);
-                        }
-                    }
-                } else {
-                    retornaSolucao(interessada);
-                    return;
-                }
+            if (solucaoDefinitiva()) {
+                retornaSolucao();
+                return;
             }
-            movimentoBemSucedido = definirMovimentoSucedido(); 
-        } while (!movimentoBemSucedido && existemInteressadas());
+
+            i++;
+            if (i < ListaDeInteressadasRestantes.size()) {
+                tenta(ListaDeInteressadasRestantes.get(i));
+            } else {
+                solucaoProvisoria();
+                ListaDeInteressadas.remove(0);
+                backtrack(ListaDeInteressadas, quantidadeDeEnergia);
+            }
+        } else {
+            solucaoProvisoria();
+            ListaDeInteressadasRestantes.remove(ListaDeInteressadasRestantes.get(i));
+            tenta(ListaDeInteressadas.get(i));
+        }
     }
 
- 
-    private boolean solucaoAceitavel(Interessada interessada) {
-        if (interessada.getValorPorLote() + valorAtual <= quantidadeDeEnergia)  )
-        return false;
+    // Métodos auxiliares
+    private static boolean solucaoAceitavel(Interessada interessada) {
+        if (interessada.getValorPorLote() + valorProvisorio <= quantidadeDeEnergia)
+            return true;
+        else
+            return false;
     }
 
-    private void registraInteressada(Interessada interessada) {
+    private static void registraInteressada(Interessada interessada) {
+        ListaResultadoProvisorio.add(interessada);
+        valorProvisorio += interessada.getValorPorLote();
     }
 
-    private boolean solucaoDefinitiva(Interessada interessada) {
-        return false; // Placeholder
+    private static boolean solucaoDefinitiva() {
+        if (valorProvisorio == quantidadeDeEnergia)
+            return true;
+        else
+            return false;
     }
 
-    private List<Interessada> gerarInteressadasRestantes(Interessada interessada) {
-        return new ArrayList<>(); // Placeholder
+    private static void solucaoProvisoria() {
+        if (valorFinal < valorProvisorio) {
+            valorFinal = valorProvisorio;
+            ArrayList<Interessada> listaResultadoFinal = ListaResultadoProvisorio;
+        }
     }
 
-    private boolean encontrouSolucao() {
-        return false; // Placeholder
+    private static void retornaSolucao() {
+        valorFinal = valorProvisorio;
+        ArrayList<Interessada> listaResultadoFinal = ListaResultadoProvisorio;
+        valorFinal = valorProvisorio;
+        Interessadas.mostrarResultadoFinal();
+        System.out.println("Valor obtido: " + valorFinal);
     }
 
-    private void apagaRegistroAnterior(Interessada interessada) {
-    }
-
-    private void retornaSolucao(Interessada interessada) {
-    }
-
-    private boolean definirMovimentoSucedido() {
-        return false; // Placeholder
-    }
-
-    private boolean existemInteressadas() {
-        return false; // Placeholder
-    }
 }
-
-/*
- * public class Backtracking{
- * void backtrack(Interessada interessada) {
- * int valorPorLote = interessada.getValorPorLote();
- * 
- * if (promissor(valorPorLote)) {
- * if (existe_solucao(valorPorLote)) {
- * armazena_solucao(valorPorLote);
- * } else {
- * for (Interessada filho : v.getFilhos()) {
- * backtrack(filho);
- * }
- * }
- * }
- * }
- * }
- */
