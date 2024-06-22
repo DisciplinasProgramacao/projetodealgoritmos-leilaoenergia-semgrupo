@@ -1,8 +1,8 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
 
+    
     public static int quantidadeDeEnergia() {
         try (Scanner ler = new Scanner(System.in)) {
             System.out.println("Informe a quantidade de energia:");
