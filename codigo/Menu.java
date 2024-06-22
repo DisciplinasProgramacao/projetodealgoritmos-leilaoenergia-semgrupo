@@ -11,7 +11,7 @@ public class Menu {
         }
     }
 
-    public static void ListaDeInteressadas(){
+    public static void listaDeInteressadas(){
             String nomeDaInteressada = "I1";
             int quantidadePorLote = 500;
             int valorPorLote = 500;
@@ -54,7 +54,6 @@ public class Menu {
             interessada = Interessada.CriarInteressada(nomeDaInteressada, quantidadePorLote, valorPorLote, valorPorMega);
             Interessadas.adicionarInteressada(interessada);
 
-            
         }
 
     /*
