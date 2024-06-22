@@ -2,55 +2,69 @@ import java.util.ArrayList;
 
 public class Interessadas {
 
-    public static ArrayList<Interessada> ListaDeInteressadas = new ArrayList<Interessada>();
-    public static ArrayList<Interessada> ListaDeInteressadasRestantes = new ArrayList<Interessada>();
-    public static ArrayList<Interessada> ListaResultadoFinal = new ArrayList<Interessada>();
-    public static ArrayList<Interessada> ListaResultadoProvisorio = new ArrayList<Interessada>();
+    public static ArrayList<Interessada> listaDeInteressadas = new ArrayList<Interessada>();
+    public static ArrayList<Interessada> listaDeInteressadasRestantes = new ArrayList<Interessada>();
+    public static ArrayList<Interessada> listaResultadoFinal = new ArrayList<Interessada>();
+    public static ArrayList<Interessada> listaResultadoProvisorio = new ArrayList<Interessada>();
 
 
     public static void adicionarInteressada(Interessada interessada) {
-        ListaDeInteressadas.add(interessada);
+        listaDeInteressadas.add(interessada);
     }
 
     public static void removerInteressada(Interessada interessada) {
-        ListaDeInteressadas.remove(interessada);
+        listaDeInteressadas.remove(interessada);
+    }
+
+    public static ArrayList<Interessada> criarInteressadasRestantes(ArrayList<Interessada> lista){
+        listaDeInteressadasRestantes=new ArrayList<>(lista);
+        return listaDeInteressadasRestantes;
+    }
+
+    public static ArrayList<Interessada> criarInteressadas(ArrayList<Interessada> lista){
+        listaDeInteressadas=new ArrayList<>(lista);
+        return listaDeInteressadas;
     }
 
     public static void mostrarInteressadas() {
-        System.out.println("Interessadas:");
-        for (int i = 0; i < ListaDeInteressadas.size(); i++) {
+            System.out.println("Interessadas:");
+        for (int i = 0; i < listaDeInteressadas.size(); i++) {
 
-            System.out.println(" - Nome: " + ListaDeInteressadas.get(i).getNome() + " Quantidade por Lote: "
-                    + ListaDeInteressadas.get(i).getQuantidadePorLote() + " - Valor por Lote: "
-                    + ListaDeInteressadas.get(i).getValorPorLote());
+            System.out.println(" - Nome: " + listaDeInteressadas.get(i).getNome() + " Quantidade por Lote: "
+                    + listaDeInteressadas.get(i).getQuantidadePorLote() + " - Valor por Lote: "
+                    + listaDeInteressadas.get(i).getValorPorLote());
         }
     }
 
     public static void mostrarInteressadasRestantes() {
         System.out.println("Interessadas Restantes:");
-        for (int i = 0; i < ListaDeInteressadasRestantes.size(); i++) {
+        for (int i = 0; i < listaDeInteressadasRestantes.size(); i++) {
 
-            System.out.println(" - Nome: " + ListaDeInteressadasRestantes.get(i).getNome() + " Quantidade por Lote: "
-                    + ListaDeInteressadasRestantes.get(i).getQuantidadePorLote() + " - Valor por Lote: "
-                    + ListaDeInteressadasRestantes.get(i).getValorPorLote());
+            System.out.println(" - Nome: " + listaDeInteressadasRestantes.get(i).getNome() + " Quantidade por Lote: "
+                    + listaDeInteressadasRestantes.get(i).getQuantidadePorLote() + " - Valor por Lote: "
+                    + listaDeInteressadasRestantes.get(i).getValorPorLote());
         }
     }
 
     public static void mostrarResultadoFinal() {
 
         System.out.println("Interessadas Restantes:");
-        for (int i = 0; i < ListaResultadoFinal.size(); i++) {
+        for (int i = 0; i < listaResultadoFinal.size(); i++) {
 
-            System.out.println(" - Nome: " + ListaResultadoFinal.get(i).getNome() + " Quantidade por Lote: "
-                    + ListaResultadoFinal.get(i).getQuantidadePorLote() + " - Valor por Lote: "
-                    + ListaResultadoFinal.get(i).getValorPorLote());
+            System.out.println(" - Nome: " + listaResultadoFinal.get(i).getNome() + " Quantidade por Lote: "
+                    + listaResultadoFinal.get(i).getQuantidadePorLote() + " - Valor por Lote: "
+                    + listaResultadoFinal.get(i).getValorPorLote());
         }
     }
 
 
 
     public static ArrayList<Interessada> retornaInteressadas() {
-        return ListaDeInteressadas;
+        return listaDeInteressadas;
+    }
+
+    public static ArrayList<Interessada> retornaInteressadasRestantes() {
+        return listaDeInteressadasRestantes;
     }
 }
 
