@@ -3,9 +3,10 @@ import java.util.ArrayList;
 public class Executar {
     public static void main(String[] args) {
         int quantidadeDeEnergia = Menu.quantidadeDeEnergia();
-        Menu.ListaDeInteressadas();
+        Menu.listaDeInteressadas();
+        System.out.println("Quantidade de Energia: "+ quantidadeDeEnergia);
+        ArrayList<Interessada> listaDeInteressadas = Interessadas.retornaInteressadas();
         Interessadas.mostrarInteressadas();
-        ArrayList<Interessada> ListaDeInteressadas = Interessadas.retornaInteressadas();
-        Backtracking.backtrack(ListaDeInteressadas, quantidadeDeEnergia);
+        Backtracking.backtrack(listaDeInteressadas, quantidadeDeEnergia);
     }
 }
