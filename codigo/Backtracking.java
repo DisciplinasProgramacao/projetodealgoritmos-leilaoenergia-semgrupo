@@ -16,14 +16,14 @@ class Backtracking {
         quantidadeDeEnergia = novaQuantidadeDeEnergia;
         Interessadas.criarInteressadasRestantes(NovalistaDeInteressadas);
         listaDeInteressadasRestantes = Interessadas.retornaInteressadasRestantes();
-        listaDeInteressadas=new ArrayList<>(NovalistaDeInteressadas);
-        i=0;     
+        listaDeInteressadas = new ArrayList<>(NovalistaDeInteressadas);
+        i = 0;
         tenta(listaDeInteressadasRestantes.get(0));
 
     }
 
     public static void tenta(Interessada interessada) {
-            if (solucaoAceitavel(interessada)) {
+        if (solucaoAceitavel(interessada)) {
             registraInteressada(interessada);
             System.out.println("Interessada Registrada");
 
@@ -31,34 +31,31 @@ class Backtracking {
                 retornaSolucao();
                 return;
             }
-            System.out.println("I antes " + i);
+        }
+        System.out.println("I antes " + i);
 
-            i++;
+        i++;
 
-            System.out.println("I depois " + i);
-            System.out.println("Tamanho lista " + listaDeInteressadasRestantes.size());
+        System.out.println("I depois " + i);
+        System.out.println("Tamanho lista " + listaDeInteressadasRestantes.size());
 
-    
-            if (i < listaDeInteressadasRestantes.size()) {
-                tenta(listaDeInteressadasRestantes.get(i));
-            }
-            else {
-                solucaoProvisoria();
-                if(listaDeInteressadasRestantes.size()>1){
+        if (i < listaDeInteressadasRestantes.size()) {
+            tenta(listaDeInteressadasRestantes.get(i));
+        } else {
+            solucaoProvisoria();
+            if (listaDeInteressadas.size() > 1) {
                 listaDeInteressadas.remove(0);
                 backtrack(listaDeInteressadas, quantidadeDeEnergia);
-                }
-                else {
-                    Interessadas.mostrarResultadoFinal();
-                    System.out.println("Atingida a Solução ");
-                    System.out.println("Valor obtido: " + valorFinal + "valor de energia vendido: " + quantidadeFinal);
-                    return;
-                }
+            } else {
+                Interessadas.mostrarResultadoFinal();
+                System.out.println("Atingida a Solução ");
+                System.out.println("Valor obtido: R$" + valorFinal + " Quantidade de energia vendida: " + quantidadeFinal);
+                return;
             }
-            
         }
-     }
-    
+
+    }
+
     // Métodos auxiliares
     private static boolean solucaoAceitavel(Interessada interessada) {
         if (interessada.getQuantidadePorLote() + quantidadeProvisoria <= quantidadeDeEnergia)
@@ -72,7 +69,6 @@ class Backtracking {
         quantidadeProvisoria += interessada.getQuantidadePorLote();
         valorProvisorio += interessada.getValorPorLote();
 
-
         System.out.println("listaResultadoProvisorio:");
         for (int i = 0; i < listaResultadoProvisorio.size(); i++) {
 
@@ -81,7 +77,7 @@ class Backtracking {
                     + listaResultadoProvisorio.get(i).getValorPorLote());
         }
 
-        System.out.print("Valor Restante: " );
+        System.out.print("Valor Restante: ");
         System.out.println(quantidadeDeEnergia - quantidadeProvisoria);
 
     }
@@ -101,14 +97,14 @@ class Backtracking {
             listaResultadoProvisorio = new ArrayList<>();
             System.out.println("listaResultadoProvisorio:");
             for (int i = 0; i < listaResultadoProvisorio.size(); i++) {
-    
+
                 System.out.println(" - Nome: " + listaResultadoProvisorio.get(i).getNome() + " Quantidade por Lote: "
                         + listaResultadoProvisorio.get(i).getQuantidadePorLote() + " - Valor por Lote: "
                         + listaResultadoProvisorio.get(i).getValorPorLote());
             }
             System.out.println("listaResultadoFinal:");
             for (int i = 0; i < listaResultadoFinal.size(); i++) {
-    
+
                 System.out.println(" - Nome: " + listaResultadoFinal.get(i).getNome() + " Quantidade por Lote: "
                         + listaResultadoFinal.get(i).getQuantidadePorLote() + " - Valor por Lote: "
                         + listaResultadoFinal.get(i).getValorPorLote());
@@ -126,4 +122,3 @@ class Backtracking {
     }
 
 }
-    
