@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
 class Backtracking {
+    static int quantidadeProvisoria = 0;
     static int valorProvisorio = 0;
+    static int quantidadeFinal = 0;
     static int valorFinal = 0;
     static int i = 0;
     static int quantidadeDeEnergia;
@@ -42,21 +44,24 @@ class Backtracking {
             }
             else {
                 solucaoProvisoria();
+                if(listaDeInteressadasRestantes.size()>1){
                 listaDeInteressadas.remove(0);
                 backtrack(listaDeInteressadas, quantidadeDeEnergia);
+                }
+                else {
+                    Interessadas.mostrarResultadoFinal();
+                    System.out.println("Atingida a Solução ");
+                    System.out.println("Valor obtido: " + valorFinal + "valor de energia vendido: " + quantidadeFinal);
+                    return;
+                }
             }
             
         }
-        /*else {
-            solucaoProvisoria();
-            listaDeInteressadasRestantes.remove(listaDeInteressadasRestantes.get(i));
-            tenta(listaDeInteressadas.get(i));
-        }*/
-    }
+     }
     
     // Métodos auxiliares
     private static boolean solucaoAceitavel(Interessada interessada) {
-        if (interessada.getValorPorLote() + valorProvisorio <= quantidadeDeEnergia)
+        if (interessada.getQuantidadePorLote() + quantidadeProvisoria <= quantidadeDeEnergia)
             return true;
         else
             return false;
@@ -64,7 +69,9 @@ class Backtracking {
 
     private static void registraInteressada(Interessada interessada) {
         listaResultadoProvisorio.add(interessada);
+        quantidadeProvisoria += interessada.getQuantidadePorLote();
         valorProvisorio += interessada.getValorPorLote();
+
 
         System.out.println("listaResultadoProvisorio:");
         for (int i = 0; i < listaResultadoProvisorio.size(); i++) {
@@ -75,12 +82,12 @@ class Backtracking {
         }
 
         System.out.print("Valor Restante: " );
-        System.out.println(quantidadeDeEnergia - valorProvisorio);
+        System.out.println(quantidadeDeEnergia - quantidadeProvisoria);
 
     }
 
     private static boolean solucaoDefinitiva() {
-        if (valorProvisorio == quantidadeDeEnergia)
+        if (quantidadeProvisoria == quantidadeDeEnergia)
             return true;
         else
             return false;
@@ -89,17 +96,33 @@ class Backtracking {
     private static void solucaoProvisoria() {
         if (valorFinal < valorProvisorio) {
             valorFinal = valorProvisorio;
+            quantidadeFinal = quantidadeProvisoria;
             listaResultadoFinal = new ArrayList<>(listaResultadoProvisorio);
+            listaResultadoProvisorio = new ArrayList<>();
+            System.out.println("listaResultadoProvisorio:");
+            for (int i = 0; i < listaResultadoProvisorio.size(); i++) {
+    
+                System.out.println(" - Nome: " + listaResultadoProvisorio.get(i).getNome() + " Quantidade por Lote: "
+                        + listaResultadoProvisorio.get(i).getQuantidadePorLote() + " - Valor por Lote: "
+                        + listaResultadoProvisorio.get(i).getValorPorLote());
+            }
+            System.out.println("listaResultadoFinal:");
+            for (int i = 0; i < listaResultadoFinal.size(); i++) {
+    
+                System.out.println(" - Nome: " + listaResultadoFinal.get(i).getNome() + " Quantidade por Lote: "
+                        + listaResultadoFinal.get(i).getQuantidadePorLote() + " - Valor por Lote: "
+                        + listaResultadoFinal.get(i).getValorPorLote());
+            }
         }
     }
 
     private static void retornaSolucao() {
         valorFinal = valorProvisorio;
+        quantidadeFinal = quantidadeProvisoria;
         listaResultadoFinal = new ArrayList<>(listaResultadoProvisorio);
-        valorFinal = valorProvisorio;
         Interessadas.mostrarResultadoFinal();
         System.out.println("Atingida a Solução ");
-        System.out.println("Valor obtido: " + valorFinal);
+        System.out.println("Valor obtido: " + valorFinal + "valor de energia vendido: " + quantidadeFinal);
     }
 
 }
