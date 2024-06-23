@@ -58,7 +58,6 @@ public class Interessadas {
     }
 
 
-
     public static ArrayList<Interessada> retornaInteressadas() {
         return listaDeInteressadas;
     }
