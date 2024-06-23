@@ -9,6 +9,6 @@ Projeto e implementação de solução utilizando backtracking e programação d
 
 ## Professores responsáveis
 
-* Joao Caram
+* João Caram
 
 
