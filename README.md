@@ -1,14 +1,11 @@
-# Nome do projeto
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+# Trabalho Prático em Grupo
+
+Projeto e implementação de solução utilizando backtracking e programação dinâmica para venda de energia elétrica por meio de leilão.
 
 ## Alunos integrantes da equipe
 
-* Anré Fernandez Mendes
+* André Fernandez Mendes
 * Leonardo Augusto Pereira do Carmo
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 4
-* Nome completo do aluno 4
 
 ## Professores responsáveis
 
