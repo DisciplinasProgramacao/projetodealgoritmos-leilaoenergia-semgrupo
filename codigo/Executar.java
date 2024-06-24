@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Executar {
     public static void main(String[] args) {
-        int quantidadeDeEnergia = 8000;
+        int quantidadeDeEnergia = 5000;
         ProcessarEntrada.tratarDadosEntrada();
         //Menu.listaDeInteressadas();
         System.out.println("Quantidade de Energia: "+ quantidadeDeEnergia);
