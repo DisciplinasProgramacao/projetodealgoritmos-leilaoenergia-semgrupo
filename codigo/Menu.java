@@ -57,5 +57,6 @@ public class Menu {
         interessada = Interessada.CriarInteressada(nomeDaInteressada, quantidadePorLote, valorPorLote, valorPorMega);
         Interessadas.adicionarInteressada(interessada);
     }
-   
+
+    
 }
