@@ -36,28 +36,6 @@ public class Interessadas {
         }
     }
 
-    public static void mostrarInteressadasRestantes() {
-        System.out.println("Interessadas Restantes:");
-        for (int i = 0; i < listaDeInteressadasRestantes.size(); i++) {
-
-            System.out.println(" - Nome: " + listaDeInteressadasRestantes.get(i).getNome() + " Quantidade por Lote: "
-                    + listaDeInteressadasRestantes.get(i).getQuantidadePorLote() + " - Valor por Lote: "
-                    + listaDeInteressadasRestantes.get(i).getValorPorLote());
-        }
-    }
-
-    public static void mostrarResultadoFinal() {
-
-        System.out.println("Interessadas Restantes:");
-        for (int i = 0; i < listaResultadoFinal.size(); i++) {
-
-            System.out.println(" - Nome: " + listaResultadoFinal.get(i).getNome() + " Quantidade por Lote: "
-                    + listaResultadoFinal.get(i).getQuantidadePorLote() + " - Valor por Lote: "
-                    + listaResultadoFinal.get(i).getValorPorLote());
-        }
-    }
-
-
     public static ArrayList<Interessada> retornaInteressadas() {
         return listaDeInteressadas;
     }
