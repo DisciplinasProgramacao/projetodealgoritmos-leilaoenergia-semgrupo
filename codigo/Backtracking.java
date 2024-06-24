@@ -6,6 +6,8 @@ class Backtracking {
     static int quantidadeFinal = 0;
     static int valorFinal = 0;
     static int i = 0;
+    static int b = 0;
+
     static int quantidadeDeEnergia;
     public static ArrayList<Interessada> listaDeInteressadas = new ArrayList<Interessada>();
     public static ArrayList<Interessada> listaDeInteressadasRestantes = new ArrayList<Interessada>();
@@ -49,21 +51,23 @@ class Backtracking {
                                                                 // tenta valores não utilizados
                     listaDeInteressadasRestantes = new ArrayList<>(listaDeInteressadasRestantes2);
                     listaDeInteressadasRestantes2 = new ArrayList<>();
-                    i = 0;
+                    b++;
+                    if(listaDeInteressadasRestantes.size() - b>0){
 
+                    for(int j=b; j>0 ; j--){
                     valorProvisorio = valorProvisorio
-                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)).getValorPorLote();
+                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j)).getValorPorLote();
                     quantidadeProvisoria = quantidadeProvisoria
-                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1))
+                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j))
                                     .getQuantidadePorLote();
 
-                    listaDeInteressadasExcluidas.add(0,
-                            listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)));
+                    //listaDeInteressadasExcluidas.add(0,
+                    //        listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j)));
 
-                    listaResultadoProvisorio.remove(listaResultadoProvisorio.size() - 1);
-
-                    tenta(listaDeInteressadasRestantes.get(i));
-                } else {
+                    if(listaDeInteressadasRestantes.size()>0)
+                    tenta(listaDeInteressadasRestantes.get(0));}
+                    }
+                    } else {
                     retornaSolucao();
                     return;
                 }
