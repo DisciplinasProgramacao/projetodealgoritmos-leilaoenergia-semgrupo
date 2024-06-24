@@ -12,6 +12,7 @@ public class Menu {
         }
     }
 
+
     public static void listaDeInteressadas() {
         String nomeDaInteressada = "I1";
         int quantidadePorLote = 500;
@@ -56,25 +57,5 @@ public class Menu {
         interessada = Interessada.CriarInteressada(nomeDaInteressada, quantidadePorLote, valorPorLote, valorPorMega);
         Interessadas.adicionarInteressada(interessada);
     }
-
-    /*
-     * Scanner ler = new Scanner(System.in);
-     * System.out.println("Informe a quantidade de interessadas:");
-     * int quantidadeDeInteressadas = ler.nextInt();
-     * for (int i = 0; i < quantidadeDeInteressadas; i++) {
-     * int n=i+1;
-     * System.out.println("Informe o nome da interessada número "+ n + ":");
-     * String nomeDaInteressada = ler.next();
-     * System.out.
-     * println("Informe a quantidade de energia por lote da interessada número "+ n
-     * + ":");
-     * int quantidadePorLote = ler.nextInt();
-     * System.out.println("Informe o valor por lote da interessada número "+ n +
-     * ":");
-     * int valorPorLote = ler.nextInt();
-     * Interessada interessada = Interessada.CriarInteressada(nomeDaInteressada,
-     * quantidadePorLote, valorPorLote);
-     * Interessadas.adicionarInteressada(interessada);
-     * }
-     */
+   
 }
