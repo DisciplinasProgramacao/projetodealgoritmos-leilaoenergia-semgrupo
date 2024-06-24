@@ -32,6 +32,7 @@ public class Interessada {
         interessada = new Interessada(nome, quantidadePorLote, valorPorLote, valorPorMega);
         return interessada;
     }
+    
 
     public String getNome() {
         return this.nome;
