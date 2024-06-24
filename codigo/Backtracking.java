@@ -9,6 +9,7 @@ class Backtracking {
     static int quantidadeDeEnergia;
     public static ArrayList<Interessada> listaDeInteressadas = new ArrayList<Interessada>();
     public static ArrayList<Interessada> listaDeInteressadasRestantes = new ArrayList<Interessada>();
+    public static ArrayList<Interessada> listaDeInteressadasRestantes2 = new ArrayList<Interessada>();
     public static ArrayList<Interessada> listaResultadoProvisorio = new ArrayList<Interessada>();
     public static ArrayList<Interessada> listaResultadoFinal = new ArrayList<Interessada>();
     public static ArrayList<Interessada> listaDeInteressadasNaoUsadas = new ArrayList<Interessada>();
@@ -18,6 +19,8 @@ class Backtracking {
         quantidadeDeEnergia = novaQuantidadeDeEnergia;
         Interessadas.criarInteressadasRestantes(novalistaDeInteressadas);
         listaDeInteressadasRestantes = Interessadas.retornaInteressadasRestantes();
+        listaDeInteressadasRestantes2 = new ArrayList<>();
+        listaDeInteressadasExcluidas = new ArrayList<>();
         listaDeInteressadas = new ArrayList<>(novalistaDeInteressadas);
         i = 0;
         tenta(listaDeInteressadasRestantes.get(0));
@@ -27,44 +30,46 @@ class Backtracking {
     public static void tenta(Interessada interessada) {
         if (solucaoAceitavel(interessada)) {
             registraInteressada(interessada);
+            listaDeInteressadasRestantes.remove(interessada); // remove interessadas registradas da lista
+
+        } else {
+            listaDeInteressadasRestantes2.add(interessada);
             listaDeInteressadasRestantes.remove(interessada);
 
-            if (solucaoDefinitiva()) {
-                retornaSolucao();
-                return;
-            }
-        } else {
-            i++;
-            listaDeInteressadasNaoUsadas.add(interessada);
         }
 
-        if (i < listaDeInteressadasRestantes.size()) {
-            tenta(listaDeInteressadasRestantes.get(i));
+        if (listaDeInteressadasRestantes.size() > 0) { // se ainda tiverem interessadas elas são analisadas
+            tenta(listaDeInteressadasRestantes.get(0));
         } else {
-            solucaoProvisoria();
-            if (listaDeInteressadas.size() > 1) {
-                if (listaDeInteressadasNaoUsadas.size() == 0) {
+            if (listaResultadoProvisorio.size() > 0) {
+                solucaoProvisoria(); // grava a solução caso tenham sido analisadas todas as interessadas
+
+                if (listaDeInteressadasRestantes2.size() > 0) { // exclui último valor da lista de Resultado provisório
+                                                                // e
+                                                                // tenta valores não utilizados
+                    listaDeInteressadasRestantes = new ArrayList<>(listaDeInteressadasRestantes2);
+                    listaDeInteressadasRestantes = new ArrayList<>();
+                    i = 0;
+
+                    valorProvisorio = valorProvisorio
+                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)).getValorPorLote();
+                    quantidadeProvisoria = quantidadeProvisoria
+                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1))
+                                    .getQuantidadePorLote();
+
+                    listaDeInteressadasExcluidas.add(0,
+                            listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)));
+
+                    listaResultadoProvisorio.remove(listaResultadoProvisorio.size() - 1);
+
+                    tenta(listaDeInteressadasRestantes.get(i));
+                } else {
                     retornaSolucao();
                     return;
-                } else {
-                    valorProvisorio = valorProvisorio- listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)).getValorPorLote();
-                    quantidadeProvisoria = quantidadeProvisoria - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)).getQuantidadePorLote();
-                   // listaDeInteressadasExcluidas.add(listaResultadoProvisorio.get((listaResultadoProvisorio.size() - 1)));
-                    listaResultadoProvisorio.remove(listaResultadoProvisorio.size() - 1);
-                    listaDeInteressadasNaoUsadas = new ArrayList<Interessada>();
-                    i = 0;
-                    tenta(listaDeInteressadasRestantes.get(i));
                 }
-
-                // listaDeInteressadas.remove(0);
-                // backtrack(listaDeInteressadas, quantidadeDeEnergia);
-            } else {
-                System.out.println("Atingida a Solução ");
-                System.out.println(
-                        "Valor obtido: R$ " + valorFinal + " Quantidade de energia vendida: " + quantidadeFinal);
-                return;
             }
         }
+
     }
 
     // Métodos auxiliares
@@ -93,13 +98,6 @@ class Backtracking {
         System.out.print("Valor até o momento: ");
         System.out.println(valorProvisorio);
 
-    }
-
-    private static boolean solucaoDefinitiva() {
-        if (quantidadeProvisoria == quantidadeDeEnergia)
-            return true;
-        else
-            return false;
     }
 
     private static void solucaoProvisoria() {
