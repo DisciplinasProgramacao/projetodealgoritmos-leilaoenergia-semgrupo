@@ -48,7 +48,7 @@ class Backtracking {
                                                                 // e
                                                                 // tenta valores não utilizados
                     listaDeInteressadasRestantes = new ArrayList<>(listaDeInteressadasRestantes2);
-                    listaDeInteressadasRestantes = new ArrayList<>();
+                    listaDeInteressadasRestantes2 = new ArrayList<>();
                     i = 0;
 
                     valorProvisorio = valorProvisorio
