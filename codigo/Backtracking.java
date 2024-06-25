@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 
 class Backtracking {
+    final static double NANO_TO_MS = 1_000_000d; // para converter de nano a milissegundos
+    final static double MS_TO_SEC = 1_000d;
+    public static long ini;
+
     static int quantidadeProvisoria = 0;
     static int valorProvisorio = 0;
     static int quantidadeFinal = 0;
     static int valorFinal = 0;
     static int i = 0;
-    static int b = 0;
+    static int k = 0;
 
     static int quantidadeDeEnergia;
     public static ArrayList<Interessada> listaDeInteressadas = new ArrayList<Interessada>();
@@ -25,6 +29,9 @@ class Backtracking {
         listaDeInteressadasExcluidas = new ArrayList<>();
         listaDeInteressadas = new ArrayList<>(novalistaDeInteressadas);
         i = 0;
+
+        ini = System.nanoTime(); // início da marcação de tempo
+
         tenta(listaDeInteressadasRestantes.get(0));
 
     }
@@ -45,30 +52,39 @@ class Backtracking {
         } else {
             if (listaResultadoProvisorio.size() > 0) {
                 solucaoProvisoria(); // grava a solução caso tenham sido analisadas todas as interessadas
-
+                
                 if (listaDeInteressadasRestantes2.size() > 0) { // exclui último valor da lista de Resultado provisório
                                                                 // e
                                                                 // tenta valores não utilizados
                     listaDeInteressadasRestantes = new ArrayList<>(listaDeInteressadasRestantes2);
                     listaDeInteressadasRestantes2 = new ArrayList<>();
-                    b++;
-                    if(listaDeInteressadasRestantes.size() - b>0){
+                    k++;
+                    if (listaDeInteressadasRestantes.size() - k > 0) {
 
-                    for(int j=b; j>0 ; j--){
-                    valorProvisorio = valorProvisorio
-                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j)).getValorPorLote();
-                    quantidadeProvisoria = quantidadeProvisoria
-                            - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j))
-                                    .getQuantidadePorLote();
+                        for (int j = k; j > 0; j--) {
+                            valorProvisorio = valorProvisorio
+                                    - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j))
+                                            .getValorPorLote();
+                            quantidadeProvisoria = quantidadeProvisoria
+                                    - listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j))
+                                            .getQuantidadePorLote();
 
-                    //listaDeInteressadasExcluidas.add(0,
-                    //        listaResultadoProvisorio.get((listaResultadoProvisorio.size() - j)));
+                            // listaDeInteressadasExcluidas.add(0,
 
-                    if(listaDeInteressadasRestantes.size()>0)
-                    tenta(listaDeInteressadasRestantes.get(0));}
+                            if (listaDeInteressadasRestantes.size() > 0)
+                                tenta(listaDeInteressadasRestantes.get(0));
+                        }
                     }
-                    } else {
+                } else {
                     retornaSolucao();
+
+                    long fim = System.nanoTime(); // fim da marcação de tempo
+                    double tempoMs = (fim - ini) / NANO_TO_MS; // conversões e, em seguida, impressão do resultado
+                    double tempoSeg = tempoMs / MS_TO_SEC;
+
+                    System.out.println("Finalizado em " + String.format("%.2f", tempoMs) + " ms ("
+                            + String.format("%.4f", tempoSeg) + " segundos).");
+
                     return;
                 }
             }
@@ -117,6 +133,8 @@ class Backtracking {
                         + listaResultadoFinal.get(i).getQuantidadePorLote() + " - Valor por Lote: "
                         + listaResultadoFinal.get(i).getValorPorLote());
             }
+            System.out.println("Solução ");
+            System.out.println("Valor obtido: R$ " + valorFinal + " - Quantidade de energia vendido: " + quantidadeFinal);
         }
     }
 
